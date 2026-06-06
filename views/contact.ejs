@@ -1,0 +1,117 @@
+<%- include('partials/header', { pageTitle, pageDescription, baseUrl, email, phone, social, addresses, currentYear, page }) %>
+
+<main>
+  <!-- ═════ PAGE HERO ═════ -->
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Contact Us</span>
+      </nav>
+      <h1 class="page-hero-title">Get in Touch</h1>
+      <p class="page-hero-subtitle">We'd love to hear from you</p>
+    </div>
+  </section>
+
+  <!-- ═════ CONTACT SECTION ═════ -->
+  <section class="section">
+    <div class="container">
+      <div class="contact-layout">
+        <!-- Left: Info -->
+        <div class="contact-info-col">
+          <span class="section-label">Contact Details</span>
+          <h2 class="section-title">Knowledgepie Private Limited</h2>
+
+          <div class="contact-items">
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fa-regular fa-envelope"></i>
+              </div>
+              <div>
+                <span class="contact-label">Email</span>
+                <a href="mailto:<%= email %>" class="contact-value"><%= email %></a>
+                <a href="mailto:knowledgepie22@gmail.com" class="contact-value" style="margin-top:4px;">knowledgepie22@gmail.com</a>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fa-regular fa-phone"></i>
+              </div>
+              <div>
+                <span class="contact-label">Phone</span>
+                <a href="tel:<%= phone %>" class="contact-value"><%= phone %></a>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fa-regular fa-globe"></i>
+              </div>
+              <div>
+                <span class="contact-label">Website</span>
+                <a href="https://knowledgepie.in" class="contact-value" target="_blank" rel="noreferrer">knowledgepie.in</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-addresses">
+            <div class="contact-address-card">
+              <div class="address-icon"><i class="fa-regular fa-location-dot"></i></div>
+              <h3>Office Address</h3>
+              <address>Bio-NEST, CSIR-NEIST, Pulibor-785006, Jorhat, Assam, India</address>
+              <a href="https://www.google.com/maps/search/?api=1&query=Bio-NEST%20CSIR-NEIST%20Jorhat%20Assam" target="_blank" rel="noreferrer" class="btn btn-sm btn-outline">
+                <i class="fa-solid fa-map-pin"></i> Open in Maps
+              </a>
+            </div>
+            <div class="contact-address-card">
+              <div class="address-icon"><i class="fa-regular fa-building"></i></div>
+              <h3>Registered Office</h3>
+              <address>21 Nehru Park, New Colony, Samannaypur Path, Byelane, Jorhat, Assam-785001, India</address>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="contact-form-col">
+          <div class="contact-form-card">
+            <iframe
+              data-tally-src="https://tally.so/embed/2EDdPV?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+              loading="lazy" width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0"
+              title="Contact Form"></iframe>
+            <script>
+              var d = document, w = "https://tally.so/widgets/embed.js", v = function() {
+                if ("undefined" != typeof Tally) Tally.loadEmbeds();
+                else d.querySelectorAll('iframe[data-tally-src]:not([src])').forEach(function(e) { e.src = e.dataset.tallySrc; });
+              };
+              if ("undefined" != typeof Tally) v();
+              else if (d.querySelector('script[src="' + w + '"]') == null) {
+                var s = d.createElement("script"); s.src = w; s.onload = v; s.onerror = v; d.body.appendChild(s);
+              }
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════ MAP SECTION ═════ -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Find Us</span>
+        <h2 class="section-title">Our Location</h2>
+      </div>
+      <div class="map-container">
+        <iframe
+          title="Knowledgepie location"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3563.179178626186!2d94.153368975218!3d26.738657676751348!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3746e9fd7cb004d5%3A0x303a7036b3a0d356!2sCSIR%20%E2%80%93%20North%20East%20Institute%20Of%20Science%20And%20Technology%20(NEIST)!5e0!3m2!1sen!2sin!4v1780389958112!5m2!1sen!2sin"
+          width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('partials/footer', { baseUrl, email, phone, social, addresses, currentYear }) %>

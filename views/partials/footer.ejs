@@ -1,0 +1,90 @@
+  <!-- ══════ FOOTER ══════ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand Column -->
+        <div class="footer-col footer-brand">
+          <div class="footer-logo">
+            <img src="/media/logo.png" alt="Knowledgepie logo" width="56" height="56" />
+            <span>Knowledgepie</span>
+          </div>
+          <p class="footer-tagline">Pioneering safer MRI contrast agents through nanotechnology and innovation.</p>
+          <div class="social-links">
+            <a class="social-link" href="<%= social.linkedin %>" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a class="social-link" href="<%= social.twitter %>" target="_blank" rel="noreferrer" aria-label="X (Twitter)">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a class="social-link" href="<%= social.instagram %>" target="_blank" rel="noreferrer" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-col">
+          <h3 class="footer-heading">Quick Links</h3>
+          <nav class="footer-nav" aria-label="Footer navigation">
+            <a href="/">Home</a>
+            <a href="/about">About Us</a>
+            <a href="/team">Team</a>
+            <a href="/news">News</a>
+            <a href="/media">Media</a>
+            <a href="/investors">Investors</a>
+            <a href="/contact">Contact Us</a>
+          </nav>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-col">
+          <h3 class="footer-heading">Get in Touch</h3>
+          <ul class="footer-contact-list">
+            <li>
+              <i class="fa-regular fa-envelope"></i>
+              <a href="mailto:<%= email %>"><%= email %></a>
+            </li>
+            <li>
+              <i class="fa-regular fa-envelope"></i>
+              <a href="mailto:knowledgepie22@gmail.com">knowledgepie22@gmail.com</a>
+            </li>
+            <li>
+              <i class="fa-regular fa-phone"></i>
+              <a href="tel:<%= phone %>"><%= phone %></a>
+            </li>
+            <li>
+              <i class="fa-regular fa-location-dot"></i>
+              <span><%= addresses.office %></span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Map -->
+        <div class="footer-col footer-map-col">
+          <h3 class="footer-heading">Location</h3>
+          <div class="footer-map-wrap">
+            <iframe
+              title="Knowledgepie location"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3563.179178626186!2d94.153368975218!3d26.738657676751348!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3746e9fd7cb004d5%3A0x303a7036b3a0d356!2sCSIR%20%E2%80%93%20North%20East%20Institute%20Of%20Science%20And%20Technology%20(NEIST)!5e0!3m2!1sen!2sin!4v1780389958112!5m2!1sen!2sin"
+              width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; <%= currentYear %> Knowledgepie Private Limited. All rights reserved.</span>
+        <span class="footer-badge">Made with ❤️ in India · Xeuj<sup>&reg;</sup></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════ Back to Top ══════ -->
+  <button type="button" class="scroll-top" id="scrollTop" aria-label="Scroll to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- ══════ Scripts ══════ -->
+  <script src="/js/main.js" defer></script>
+</body>
+</html>

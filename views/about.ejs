@@ -1,0 +1,89 @@
+<%- include('partials/header', { pageTitle, pageDescription, baseUrl, email, phone, social, addresses, currentYear, page }) %>
+
+<main>
+  <!-- ═════ PAGE HERO ═════ -->
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">About Us</span>
+      </nav>
+      <h1 class="page-hero-title">About Knowledgepie</h1>
+      <p class="page-hero-subtitle">Revolutionizing medical imaging through nanotechnology</p>
+    </div>
+  </section>
+
+  <!-- ═════ ABOUT INTRO ═════ -->
+  <section class="section">
+    <div class="container">
+      <div class="about-intro-grid">
+        <div class="about-intro-text">
+          <span class="section-label">Our Story</span>
+          <h2 class="section-title">Knowledgepie Private Limited</h2>
+          <p><strong>Knowledgepie</strong> is a cutting-edge biotechnology company that specializes in the development of innovative solutions for medical imaging. With a focus on creating alternative MRI contrast agents, Knowledgepie is revolutionizing the field of medical diagnostics with its groundbreaking technology.</p>
+          <p>Founded by Dr. Madhulekha Gogoi with the BIG grant received from BIRAC, DBT, our journey began with a mission — to find a better diagnostic tool to detect cancer at an early stage. Today, we stand at the forefront of nanotechnology-based contrast agents.</p>
+          <div class="about-signature">
+            <div>
+              <strong>Dr. Madhulekha Gogoi</strong>
+              <span>Director & Co-founder</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-intro-image">
+          <img src="/media/logo.png" alt="Knowledgepie Logo" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════ PRODUCT SUMMARY ═════ -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="product-grid">
+        <div class="product-text">
+          <span class="section-label">Our Innovation</span>
+          <h2 class="section-title">Xeuj<sup>&reg;</sup> — The Product</h2>
+          <p>Our flagship product <strong>"Xeuj<sup>&reg;</sup>"</strong> is a patented nanoparticle-based contrast agent, specifically targeting renal impaired patients where GBCA is banned by FDA.</p>
+          <p>It is developed through a green route, offering numerous advantages over traditional gadolinium-based contrast agents:</p>
+          <ul class="product-features">
+            <li><i class="fa-solid fa-check-circle"></i> NSF-free iron-based formulation</li>
+            <li><i class="fa-solid fa-check-circle"></i> Green, aqueous, one-pot synthesis</li>
+            <li><i class="fa-solid fa-check-circle"></i> Non-toxic (GLP & Genotoxicity certified)</li>
+            <li><i class="fa-solid fa-check-circle"></i> First "Make in India" contrast agent</li>
+          </ul>
+          <a href="/contact" class="btn btn-primary">Request Information</a>
+        </div>
+        <div class="product-patents">
+          <img src="/media/about/patent1.jpg" alt="Patent certificate" class="patent-image" />
+          <p class="patent-caption">Indian Patent Granted (Ref no. 351940)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════ USPS ═════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Why Choose Xeuj<sup>&reg;</sup></span>
+        <h2 class="section-title">USPs of Our Innovation</h2>
+      </div>
+      <div class="usps-grid">
+        <% siteData.usps.forEach(function(usp) { %>
+        <article class="usp-card">
+          <div class="usp-image-wrap">
+            <img src="<%= usp.image %>" alt="<%= usp.title %>" loading="lazy" />
+          </div>
+          <div class="usp-body">
+            <h3><%= usp.title %></h3>
+            <p><%= usp.description %></p>
+          </div>
+        </article>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('partials/footer', { baseUrl, email, phone, social, addresses, currentYear }) %>

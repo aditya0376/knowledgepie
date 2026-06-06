@@ -1,0 +1,259 @@
+<%- include('partials/header', { pageTitle, pageDescription, baseUrl, email, phone, social, addresses, currentYear, page }) %>
+
+<main>
+  <!-- ═════ HERO BANNER ═════ -->
+  <section class="hero" id="hero">
+    <div class="hero-slides" id="heroSlides">
+      <div class="hero-slide active" style="background-image: url('/media/index/banner1.jpg');">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+          <span class="hero-badge">Innovating Safer Diagnostics</span>
+          <h1 class="hero-title">Imaging the Future</h1>
+          <p class="hero-subtitle">Nanotechnology-based MRI Contrast for Safer Diagnosis</p>
+          <div class="hero-actions">
+            <a href="/about" class="btn btn-primary">Discover More</a>
+            <a href="/contact" class="btn btn-outline">Contact Us</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-slide" style="background-image: url('/media/index/banner2.jpg');">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+          <span class="hero-badge">Breakthrough Innovation</span>
+          <p class="hero-title">Xeuj<sup>&reg;</sup></p>
+          <p class="hero-subtitle">Safe Contrast Agent for Renal Impaired Patients</p>
+          <div class="hero-actions">
+            <a href="/about" class="btn btn-primary">Learn More</a>
+            <a href="/contact" class="btn btn-outline">Get in Touch</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="hero-btn hero-prev" aria-label="Previous slide"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="hero-btn hero-next" aria-label="Next slide"><i class="fa-solid fa-chevron-right"></i></button>
+    <div class="hero-dots" id="heroDots"></div>
+  </section>
+
+  <!-- ═════ INTRO SECTION ═════ -->
+  <section class="section intro-section">
+    <div class="container">
+      <div class="intro-grid">
+        <div class="intro-image-wrapper">
+          <img src="/media/gallery/NEC IGNITE-IITG.jfif" alt="Knowledgepie at NEC IGNITE IITG" class="intro-image" loading="lazy" />
+          <div class="intro-experience-badge">
+            <span class="badge-number"><%= siteData.company.researchYears %>+</span>
+            <span class="badge-label">Years of Research</span>
+          </div>
+        </div>
+        <div class="intro-text">
+          <span class="section-label">Who We Are</span>
+          <h2 class="section-title">Knowledgepie Private Limited</h2>
+          <p class="intro-lead">A cutting-edge biotechnology company specializing in innovative solutions for medical imaging.</p>
+          <p>We are developing alternative MRI contrast agents to improve safety, sustainability, and clinical reliability. Our team is driven by a mission to revolutionize cancer detection through advanced nanotechnology.</p>
+          <div class="intro-stats">
+            <div class="intro-stat">
+              <span class="stat-num" data-count="2">+2</span>
+              <span class="stat-label">Patents</span>
+            </div>
+            <div class="intro-stat">
+              <span class="stat-num" data-count="11">11+</span>
+              <span class="stat-label">Publications</span>
+            </div>
+            <div class="intro-stat">
+              <span class="stat-num" data-count="3">3+</span>
+              <span class="stat-label">Book Chapters</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════ MISSION & TECH ═════ -->
+  <section class="section mission-tech-section">
+    <div class="container">
+      <div class="mission-tech-grid">
+        <div class="mission-card">
+          <div class="card-icon"><i class="fa-solid fa-bullseye"></i></div>
+          <h3>Our Mission</h3>
+          <p>To innovate safer contrast agents for cancer detection, prioritizing patient safety, enhancing diagnostic precision, and redefining global cancer care through advanced research, ethical practices, and collaboration with healthcare professionals.</p>
+        </div>
+        <div class="mission-card">
+          <div class="card-icon"><i class="fa-solid fa-microscope"></i></div>
+          <h3>Our Technology</h3>
+          <p>Our developed technology is capped with biocompatible molecules forming stable aqueous solutions. It is non-toxic as certified by GLP and Genotoxicity studies. Synthesis is facile, aqueous, thermo-free, and single-step.</p>
+        </div>
+        <div class="mission-card">
+          <div class="card-icon"><i class="fa-solid fa-flask"></i></div>
+          <h3>Our Product</h3>
+          <p>Xeuj<sup>&reg;</sup> — a patented nanoparticle-based contrast agent targeting renal impaired patients where GBCA is banned by FDA. An iron-based, NSF-free alternative.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════ XEUJ SPOTLIGHT ═════ -->
+  <section class="section xeuj-section">
+    <div class="container">
+      <div class="xeuj-card">
+        <span class="xeuj-eyebrow">Our Flagship Product</span>
+        <h2 class="xeuj-name">Xeuj<sup>&reg;</sup></h2>
+        <p class="xeuj-desc">Our flagship product <strong>&ldquo;Xeuj<sup>&reg;</sup>&rdquo;</strong> is a patented nanoparticle-based contrast agent, specifically targeting renal impaired patients where GBCA is banned by FDA.</p>
+        <div class="xeuj-tags">
+          <span class="xeuj-tag">Patented</span>
+          <span class="xeuj-tag">NSF-Free</span>
+          <span class="xeuj-tag">Iron-Based</span>
+          <span class="xeuj-tag">Eco-Friendly</span>
+          <span class="xeuj-tag">Make in India</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════ APPLICATIONS ═════ -->
+  <section class="section apps-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Applications</span>
+        <h2 class="section-title">Where Xeuj<sup>&reg;</sup> Makes a Difference</h2>
+      </div>
+      <div class="apps-grid">
+        <div class="apps-content">
+          <ul class="apps-list">
+            <li>
+              <div class="app-icon"><i class="fa-solid fa-magnet"></i></div>
+              <div>
+                <h3>Magnetic Resonance Imaging (MRI) Enhancement</h3>
+                <p>Improves visibility and contrast in MRI scans by altering tissue magnetic properties.</p>
+              </div>
+            </li>
+            <li>
+              <div class="app-icon"><i class="fa-solid fa-dna"></i></div>
+              <div>
+                <h3>Detection & Characterization of Tumors</h3>
+                <p>Crucial for distinguishing tumor tissues from healthy tissue, aiding in diagnosis and treatment planning.</p>
+              </div>
+            </li>
+            <li>
+              <div class="app-icon"><i class="fa-solid fa-shield-heart"></i></div>
+              <div>
+                <h3>Safe for Renal Impaired Patients</h3>
+                <p>Designed specifically for patients with kidney conditions where traditional contrast agents are contraindicated.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="apps-visual">
+          <img src="/media/index/applications.png" alt="Xeuj MRI contrast agent applications" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════ UNIQUENESS ═════ -->
+  <section class="section uniqueness-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">What Sets Us Apart</span>
+        <h2 class="section-title">Uniqueness of Xeuj<sup>&reg;</sup></h2>
+      </div>
+      <div class="uniqueness-grid">
+        <% siteData.uniqueness.forEach(function(item) { %>
+        <article class="unique-card">
+          <div class="unique-image-wrap">
+            <img src="<%= item.image %>" alt="<%= item.title %>" loading="lazy" />
+          </div>
+          <div class="unique-content">
+            <h3><%= item.title %></h3>
+            <p><%= item.description %></p>
+          </div>
+        </article>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════ PARTNERS ═════ -->
+  <section class="section partners-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Our Network</span>
+        <h2 class="section-title">Investment Partners</h2>
+      </div>
+      <div class="partners-carousel" id="partnersCarousel">
+        <button class="carousel-btn carousel-prev" aria-label="Previous partners"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="partners-track" id="partnersTrack">
+          <img src="/media/index/partner1.jpg" alt="Knowledgepie investment partner logo" loading="lazy" />
+          <img src="/media/index/partner2.jpg" alt="Knowledgepie investment partner logo" loading="lazy" />
+          <img src="/media/index/partner3.png" alt="Knowledgepie investment partner logo" loading="lazy" />
+          <img src="/media/index/partner4.jpg" alt="Knowledgepie investment partner logo" loading="lazy" />
+          <img src="/media/index/partner5.png" alt="Knowledgepie investment partner logo" loading="lazy" />
+          <img src="/media/index/partner6.png" alt="Knowledgepie investment partner logo" loading="lazy" />
+          <img src="/media/index/partner7.png" alt="Knowledgepie investment partner logo" loading="lazy" />
+          <img src="/media/index/partner8.jpeg" alt="Knowledgepie investment partner logo" loading="lazy" />
+        </div>
+        <button class="carousel-btn carousel-next" aria-label="Next partners"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════ RECENT NEWS ═════ -->
+  <% if (typeof recentPosts !== 'undefined' && recentPosts.length > 0) { %>
+  <section class="section home-news-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Latest Updates</span>
+        <h2 class="section-title">Recent News</h2>
+        <p class="section-subtitle">Stay updated with our latest milestones and stories</p>
+      </div>
+      <div class="home-news-grid">
+        <% recentPosts.forEach(function(post) { %>
+        <article class="home-news-card">
+          <a href="/news/<%= post.slug %>" class="home-news-link">
+            <div class="home-news-image">
+              <img src="<%= post.image || '/media/logo.png' %>" alt="<%= post.title %>" loading="lazy" />
+            </div>
+            <div class="home-news-body">
+              <span class="home-news-date"><%= post.date %></span>
+              <h3><%= post.title %></h3>
+              <p><%= post.excerpt.substring(0, 120) %></p>
+              <span class="home-news-read">Read More <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+          </a>
+        </article>
+        <% }); %>
+      </div>
+      <div style="text-align:center;margin-top:2rem;">
+        <a href="/news" class="btn btn-outline">View All News <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+  <% } %>
+
+  <!-- ═════ CTA ═════ -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-card">
+        <h2 class="cta-title">Join Us in the Journey</h2>
+        <p class="cta-text">Be part of India's biotech revolution. Partner with us to redefine cancer diagnostics.</p>
+        <a href="/contact" class="btn btn-primary btn-lg">Contact Us Today</a>
+        <div class="cta-stats">
+          <div class="cta-stat">
+            <span class="cta-stat-num">+2</span>
+            <span class="cta-stat-label">Patents</span>
+          </div>
+          <div class="cta-stat">
+            <span class="cta-stat-num">+12</span>
+            <span class="cta-stat-label">Years of Research</span>
+          </div>
+          <div class="cta-stat">
+            <span class="cta-stat-num">+11</span>
+            <span class="cta-stat-label">Publications</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('partials/footer', { baseUrl, email, phone, social, addresses, currentYear }) %>

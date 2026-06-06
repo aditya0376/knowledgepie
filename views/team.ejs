@@ -1,0 +1,99 @@
+<%- include('partials/header', { pageTitle, pageDescription, baseUrl, email, phone, social, addresses, currentYear, page }) %>
+
+<main>
+  <!-- ═════ PAGE HERO ═════ -->
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Team</span>
+      </nav>
+      <h1 class="page-hero-title">Our Team</h1>
+      <p class="page-hero-subtitle">Meet the people behind Knowledgepie</p>
+    </div>
+  </section>
+
+  <!-- ═════ FOUNDER ═════ -->
+  <section class="section">
+    <div class="container">
+      <div class="founder-section">
+        <div class="founder-image-wrap">
+          <img src="<%= siteData.team.founder.image %>" alt="<%= siteData.team.founder.name %>" class="founder-image" />
+        </div>
+        <div class="founder-content">
+          <span class="founder-label"><%= siteData.team.founder.title %></span>
+          <h2 class="founder-name"><%= siteData.team.founder.name %></h2>
+          <div class="founder-bio">
+            <% siteData.team.founder.bio.forEach(function(para) { %>
+            <p><%= para %></p>
+            <% }); %>
+          </div>
+          <div class="founder-contact">
+            <a href="mailto:<%= siteData.team.founder.email %>" class="btn btn-outline">
+              <i class="fa-regular fa-envelope"></i> Email
+            </a>
+            <a href="tel:<%= siteData.team.founder.phone %>" class="btn btn-outline">
+              <i class="fa-regular fa-phone"></i> Call
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════ TEAM MEMBERS ═════ -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">The Team</span>
+        <h2 class="section-title">Core Members</h2>
+      </div>
+      <div class="team-grid">
+        <% siteData.team.members.forEach(function(member) { %>
+        <article class="team-card team-<%= member.color %>">
+          <div class="team-card-image">
+            <img src="<%= member.image %>" alt="<%= member.name %>" loading="lazy" />
+          </div>
+          <div class="team-card-body">
+            <h3><%= member.name %></h3>
+            <span class="team-role"><%= member.role %></span>
+            <hr />
+            <p><%= member.bio %></p>
+            <a href="tel:<%= member.phone %>" class="team-contact-btn">
+              <i class="fa-regular fa-phone"></i> Contact
+            </a>
+          </div>
+        </article>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════ ADVISORS ═════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Guidance</span>
+        <h2 class="section-title">Scientific Advisors</h2>
+        <p class="section-subtitle">Eminent experts guiding our research and development</p>
+      </div>
+      <div class="advisors-grid">
+        <% siteData.team.advisors.forEach(function(advisor) { %>
+        <article class="advisor-card">
+          <div class="advisor-image">
+            <img src="<%= advisor.image %>" alt="<%= advisor.name %>" loading="lazy" />
+          </div>
+          <div class="advisor-body">
+            <h3><%= advisor.name %></h3>
+            <span class="advisor-role"><%= advisor.role %></span>
+            <span class="advisor-affiliation"><%= advisor.affiliation %></span>
+          </div>
+        </article>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('partials/footer', { baseUrl, email, phone, social, addresses, currentYear }) %>

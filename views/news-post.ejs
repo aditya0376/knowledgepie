@@ -1,0 +1,108 @@
+<%- include('partials/header', { pageTitle, pageDescription, baseUrl, email, phone, social, addresses, currentYear, page }) %>
+
+<!-- NewsArticle Structured Data -->
+<% if (typeof post !== 'undefined' && post) { %>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "headline": "<%= post.title.replace(/"/g, '\\"') %>",
+  "description": "<%= (post.excerpt || '').replace(/"/g, '\\"') %>",
+  "image": "<%= post.image ? baseUrl + post.image : baseUrl + '/media/logo.png' %>",
+  "datePublished": "<%= post.date %>",
+  "dateModified": "<%= post.date %>",
+  "author": {
+    "@type": "Person",
+    "name": "<%= (post.author || 'Knowledgepie Private Limited').replace(/"/g, '\\"') %>"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Knowledgepie Private Limited",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "<%= baseUrl %>/media/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "<%= baseUrl %>/news/<%= post.slug %>"
+  }
+}
+</script>
+<% } %>
+
+<main>
+  <!-- ═════ POST HERO ═════ -->
+  <section class="post-hero"<%= post.image ? ' style="background-image: url(\'' + post.image + '\');"' : '' %>>
+    <div class="post-hero-overlay"></div>
+    <div class="container post-hero-content">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="/news">News</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page"><%= post.title.substring(0, 50) %></span>
+      </nav>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa-regular fa-calendar"></i> <%= post.date %></span>
+        <span class="post-author"><i class="fa-regular fa-user"></i> <%= post.author %></span>
+      </div>
+      <h1 class="post-title"><%= post.title %></h1>
+      <div class="post-tags">
+        <% (post.tags || []).forEach(function(tag) { %>
+        <span class="news-tag"><%= tag %></span>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════ POST CONTENT ═════ -->
+  <section class="section">
+    <div class="container">
+      <div class="post-layout">
+        <article class="post-content">
+          <% if (post.image) { %>
+          <img src="<%= post.image %>" alt="<%= post.title %>" class="post-hero-image" />
+          <% } %>
+          <div class="post-body">
+            <% post.content.split('\n').forEach(function(para) { %>
+              <% if (para.trim()) { %>
+                <p><%= para.trim() %></p>
+              <% } %>
+            <% }); %>
+          </div>
+          <div class="post-share">
+            <span>Share this post:</span>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=<%= encodeURIComponent(baseUrl + '/news/' + post.slug) %>" target="_blank" rel="noreferrer" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://twitter.com/intent/tweet?text=<%= encodeURIComponent(post.title) %>&url=<%= encodeURIComponent(baseUrl + '/news/' + post.slug) %>" target="_blank" rel="noreferrer" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
+            <% if (typeof token !== 'undefined' && token) { %>
+            <a href="/admin/posts/<%= post.id %>/edit?token=<%= token %>" class="btn btn-sm btn-primary" style="margin-left:auto;border-radius:8px;padding:8px 16px;font-size:0.8rem;text-decoration:none;"><i class="fa-regular fa-pen-to-square"></i> Edit Post</a>
+            <% } %>
+          </div>
+        </article>
+
+        <aside class="post-sidebar">
+          <div class="sidebar-card">
+            <h3>About Knowledgepie</h3>
+            <p>Pioneering safer MRI contrast agents through nanotechnology and innovation.</p>
+            <a href="/about" class="btn btn-outline btn-sm">Learn More</a>
+          </div>
+          <div class="sidebar-card">
+            <h3>Contact Us</h3>
+            <p>Have questions about our technology?</p>
+            <a href="/contact" class="btn btn-primary btn-sm">Get in Touch</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════ BACK TO NEWS ═════ -->
+  <section class="section section-alt">
+    <div class="container" style="text-align:center;">
+      <a href="/news" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Back to All News</a>
+    </div>
+  </section>
+</main>
+
+<%- include('partials/footer', { baseUrl, email, phone, social, addresses, currentYear }) %>

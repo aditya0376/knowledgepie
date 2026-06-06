@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- ══════ Primary Meta Tags ══════ -->
+  <title><%= pageTitle %></title>
+  <meta name="title" content="<%= pageTitle %>" />
+  <meta name="description" content="<%= pageDescription %>" />
+  <meta name="keywords" content="Knowledgepie, MRI contrast agent, Xeuj, nanoparticle contrast, safer MRI, renal impaired contrast, GBCA alternative, NSF-free, biotech India" />
+  <meta name="author" content="Knowledgepie Private Limited" />
+  <meta name="robots" content="<%= typeof noindex !== 'undefined' && noindex ? 'noindex, nofollow' : 'index, follow' %>" />
+  <link rel="canonical" href="<%= baseUrl %><%= req && req.path || '/' %>" />
+
+  <!-- ══════ Open Graph / Facebook ══════ -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="<%= baseUrl %><%= req && req.path || '/' %>" />
+  <meta property="og:title" content="<%= pageTitle %>" />
+  <meta property="og:description" content="<%= pageDescription %>" />
+  <meta property="og:image" content="<%= typeof ogImage !== 'undefined' && ogImage ? baseUrl + ogImage : baseUrl + '/media/logo.png' %>" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- ══════ Twitter ══════ -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="<%= baseUrl %><%= req && req.path || '/' %>" />
+  <meta property="twitter:title" content="<%= pageTitle %>" />
+  <meta property="twitter:description" content="<%= pageDescription %>" />
+  <meta property="twitter:image" content="<%= typeof ogImage !== 'undefined' && ogImage ? baseUrl + ogImage : baseUrl + '/media/logo.png' %>" />
+
+  <!-- ══════ Icons ══════ -->
+  <link rel="icon" href="/media/logo.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/media/logo.png" />
+  <meta name="theme-color" content="#0B3D91" />
+
+  <!-- ══════ Fonts & Icons ══════ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- ══════ Stylesheet ══════ -->
+  <link rel="stylesheet" href="/css/style.css" />
+
+  <!-- ══════ Structured Data ══════ -->
+  <!-- Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Knowledgepie Private Limited",
+    "url": "<%= baseUrl %>",
+    "logo": "<%= baseUrl %>/media/logo.png",
+    "description": "<%= pageDescription %>",
+    "email": "<%= email %>",
+    "telephone": "<%= phone %>",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Bio-NEST, CSIR-NEIST, Pulibor",
+      "addressLocality": "Jorhat",
+      "addressRegion": "Assam",
+      "postalCode": "785006",
+      "addressCountry": "IN"
+    },
+    "sameAs": [
+      "<%= social.linkedin %>",
+      "<%= social.twitter %>",
+      "<%= social.instagram %>"
+    ]
+  }
+  </script>
+  <!-- WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Knowledgepie Private Limited",
+    "url": "<%= baseUrl %>",
+    "description": "Biotechnology company developing safer nanoparticle-based MRI contrast agents. Xeuj® — a patented, NSF-free alternative for renal impaired patients.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "<%= baseUrl %>/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  <!-- Product: Xeuj® (appears on all pages for brand visibility) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Xeuj®",
+    "description": "Patented iron-based nanoparticle MRI contrast agent. NSF-free alternative for renal impaired patients where GBCA is banned by FDA.",
+    "brand": { "@type": "Brand", "name": "Knowledgepie Private Limited" },
+    "manufacturer": { "@type": "Organization", "name": "Knowledgepie Private Limited" },
+    "category": "Medical Contrast Agent",
+    "application": "Magnetic Resonance Imaging (MRI) enhancement",
+    "award": "Indian Patent Granted (Ref no. 351940)"
+  }
+  </script>
+  <!-- BreadcrumbList -->
+  <% var breadcrumbItems = []; %>
+  <% if (page === 'home') { %>
+    <% breadcrumbItems = [{ name: 'Home', url: baseUrl + '/' }]; %>
+  <% } else if (page === 'about') { %>
+    <% breadcrumbItems = [{ name: 'Home', url: baseUrl + '/' }, { name: 'About Us', url: baseUrl + '/about' }]; %>
+  <% } else if (page === 'team') { %>
+    <% breadcrumbItems = [{ name: 'Home', url: baseUrl + '/' }, { name: 'Team', url: baseUrl + '/team' }]; %>
+  <% } else if (page === 'news') { %>
+    <% breadcrumbItems = [{ name: 'Home', url: baseUrl + '/' }, { name: 'News', url: baseUrl + '/news' }]; %>
+  <% } else if (page === 'media') { %>
+    <% breadcrumbItems = [{ name: 'Home', url: baseUrl + '/' }, { name: 'Media', url: baseUrl + '/media' }]; %>
+  <% } else if (page === 'contact') { %>
+    <% breadcrumbItems = [{ name: 'Home', url: baseUrl + '/' }, { name: 'Contact', url: baseUrl + '/contact' }]; %>
+  <% } else if (page === 'investors') { %>
+    <% breadcrumbItems = [{ name: 'Home', url: baseUrl + '/' }, { name: 'Investors', url: baseUrl + '/investors' }]; %>
+  <% } else if (page === '404') { %>
+    <% breadcrumbItems = [{ name: 'Home', url: baseUrl + '/' }, { name: 'Page Not Found', url: baseUrl + '/404' }]; %>
+  <% } %>
+  <% if (breadcrumbItems.length > 0) { %>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      <% breadcrumbItems.forEach(function(item, idx) { %>
+      { "@type": "ListItem", "position": <%= idx + 1 %>, "name": "<%= item.name %>", "item": "<%= item.url %>" }<%= idx < breadcrumbItems.length - 1 ? ',' : '' %>
+      <% }); %>
+    ]
+  }
+  </script>
+  <% } %>
+</head>
+<body class="page-<%= page %>">
+  <!-- ══════ NAVBAR ══════ -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a class="brand" href="/">
+        <img src="/media/logo.png" alt="Knowledgepie logo" class="brand-logo" width="48" height="48" />
+        <span class="brand-text">Knowledge<span class="brand-highlight">pie</span></span>
+      </a>
+
+      <button id="navToggle" class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="siteNav">
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+      </button>
+
+      <nav id="siteNav" class="site-nav" role="navigation" aria-label="Main navigation">
+        <a href="/" class="<%= page === 'home' ? 'active' : '' %>">Home</a>
+        <a href="/about" class="<%= page === 'about' ? 'active' : '' %>">About Us</a>
+        <a href="/team" class="<%= page === 'team' ? 'active' : '' %>">Team</a>
+        <a href="/news" class="<%= page === 'news' ? 'active' : '' %>">News</a>
+        <a href="/media" class="<%= page === 'media' ? 'active' : '' %>">Media</a>
+        <a href="/investors" class="<%= page === 'investors' ? 'active' : '' %>">Investors</a>
+        <a href="/contact" class="<%= page === 'contact' ? 'active' : '' %>">Contact Us</a>
+      </nav>
+    </div>
+  </header>

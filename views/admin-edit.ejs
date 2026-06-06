@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit: <%= post.title %> — Admin</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: #F0F4F8; color: #1A1A2E; min-height: 100vh; }
+    .admin-header {
+      background: linear-gradient(135deg, #0B3D91 0%, #00B4D8 100%);
+      color: #fff;
+      padding: 20px 0;
+    }
+    .admin-header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .admin-header h1 { font-size: 1.3rem; color: #fff; }
+    .admin-header h1 i { margin-right: 8px; }
+    .admin-header a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; }
+    .admin-header a:hover { color: #fff; }
+    .admin-container { max-width: 800px; margin: 0 auto; padding: 32px 24px; }
+    .form-card {
+      background: #fff; border-radius: 16px; padding: 32px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06); margin-bottom: 32px;
+    }
+    .form-card h2 { font-size: 1.2rem; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #F0F4F8; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: #1A1A2E; }
+    .form-group label .required { color: #DC2626; }
+    .form-group input[type="text"], .form-group input[type="file"], .form-group textarea {
+      width: 100%; padding: 12px 14px; border: 2px solid #E2E8F0; border-radius: 10px;
+      font-size: 0.95rem; font-family: inherit; transition: border-color 0.2s; outline: none;
+    }
+    .form-group input:focus, .form-group textarea:focus { border-color: #0B3D91; }
+    .form-group textarea { min-height: 250px; resize: vertical; }
+    .form-group .hint { font-size: 0.8rem; color: #6C757D; margin-top: 4px; }
+    .form-group .image-preview { margin-top: 10px; }
+    .form-group .image-preview img { max-width: 200px; border-radius: 8px; border: 1px solid #E2E8F0; }
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 12px 28px; border-radius: 10px; font-weight: 600; font-size: 0.9rem; border: none; cursor: pointer; transition: transform 0.2s; text-decoration: none; }
+    .btn-primary { background: linear-gradient(135deg, #0B3D91, #00B4D8); color: #fff; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(11,61,145,0.2); }
+    .btn-outline { background: transparent; border: 2px solid #E2E8F0; color: #1A1A2E; }
+    .btn-outline:hover { border-color: #0B3D91; color: #0B3D91; }
+    .admin-alert { padding: 14px 20px; border-radius: 10px; margin-bottom: 20px; font-size: 0.9rem; }
+    .admin-alert.error { background: #FEE2E2; color: #DC2626; }
+    .admin-alert.success { background: #DCFCE7; color: #16A34A; }
+  </style>
+</head>
+<body>
+  <header class="admin-header">
+    <div class="admin-header-inner">
+      <h1><i class="fa-solid fa-pen-to-square"></i> Edit Post</h1>
+      <div>
+        <a href="/admin?token=<%= token %>"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="admin-container">
+    <% if (typeof error !== 'undefined' && error) { %>
+    <div class="admin-alert error"><i class="fa-solid fa-circle-exclamation"></i> <%= error %></div>
+    <% } %>
+
+    <div class="form-card">
+      <h2><i class="fa-regular fa-pen-to-square"></i> Editing: <%= post.title %></h2>
+      <form method="POST" action="/admin/posts/<%= post.id %>/edit?token=<%= token %>" enctype="multipart/form-data">
+        <input type="hidden" name="token" value="<%= token %>" />
+        <div class="form-group">
+          <label for="title">Post Title <span class="required">*</span></label>
+          <input type="text" id="title" name="title" value="<%= post.title %>" required />
+        </div>
+        <div class="form-group">
+          <label for="author">Author</label>
+          <input type="text" id="author" name="author" value="<%= post.author %>" />
+        </div>
+        <div class="form-group">
+          <label for="tags">Tags (comma-separated)</label>
+          <input type="text" id="tags" name="tags" value="<%= (post.tags || []).join(', ') %>" />
+        </div>
+        <div class="form-group">
+          <label for="image">Featured Image</label>
+          <% if (post.image) { %>
+          <div class="image-preview">
+            <img src="<%= post.image %>" alt="Current image" />
+            <div class="hint">Current image shown. Upload a new one to replace it.</div>
+          </div>
+          <% } %>
+          <input type="file" id="image" name="image" accept="image/*" style="margin-top:8px;" />
+          <div class="hint">Accepted: JPG, PNG, WebP, GIF. Max 5 MB.</div>
+        </div>
+        <div class="form-group">
+          <label for="content">Post Content <span class="required">*</span></label>
+          <textarea id="content" name="content" required><%= post.content %></textarea>
+          <div class="hint">Use plain text. Paragraphs are created by blank lines.</div>
+        </div>
+        <div style="display:flex;gap:12px;">
+          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
+          <a href="/admin?token=<%= token %>" class="btn btn-outline"><i class="fa-solid fa-xmark"></i> Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

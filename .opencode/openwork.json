@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "workspace": {
+    "name": "knowledgepie",
+    "createdAt": 1780673461077,
+    "preset": "starter"
+  },
+  "authorizedRoots": [
+    "D:\\openwork\\knowledgepie"
+  ],
+  "reload": null
+}

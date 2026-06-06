@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>ReferenceError: D:\openwork\knowledgepie\views\index.ejs:44<br> &nbsp; &nbsp;42| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;img src=&quot;/media/gallery/NEC IGNITE-IITG.jfif&quot; alt=&quot;Knowledgepie at NEC IGNITE IITG&quot; class=&quot;intro-image&quot; loading=&quot;lazy&quot; /&gt;<br> &nbsp; &nbsp;43| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;intro-experience-badge&quot;&gt;<br> &gt;&gt; 44| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span class=&quot;badge-number&quot;&gt;&lt;%= siteData.company.researchYears %&gt;+&lt;/span&gt;<br> &nbsp; &nbsp;45| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span class=&quot;badge-label&quot;&gt;Years of Research&lt;/span&gt;<br> &nbsp; &nbsp;46| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;<br> &nbsp; &nbsp;47| &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;<br><br>siteData is not defined<br> &nbsp; &nbsp;at eval (&quot;D:\\openwork\\knowledgepie\\views\\index.ejs&quot;:13:26)<br> &nbsp; &nbsp;at index (D:\openwork\knowledgepie\node_modules\ejs\lib\ejs.js:703:17)<br> &nbsp; &nbsp;at tryHandleCache (D:\openwork\knowledgepie\node_modules\ejs\lib\ejs.js:274:36)<br> &nbsp; &nbsp;at exports.renderFile [as engine] (D:\openwork\knowledgepie\node_modules\ejs\lib\ejs.js:491:10)<br> &nbsp; &nbsp;at View.render (D:\openwork\knowledgepie\node_modules\express\lib\view.js:135:8)<br> &nbsp; &nbsp;at tryRender (D:\openwork\knowledgepie\node_modules\express\lib\application.js:657:10)<br> &nbsp; &nbsp;at app.render (D:\openwork\knowledgepie\node_modules\express\lib\application.js:609:3)<br> &nbsp; &nbsp;at ServerResponse.render (D:\openwork\knowledgepie\node_modules\express\lib\response.js:1049:7)<br> &nbsp; &nbsp;at D:\openwork\knowledgepie\server.js:64:7<br> &nbsp; &nbsp;at Layer.handle [as handle_request] (D:\openwork\knowledgepie\node_modules\express\lib\router\layer.js:95:5)</pre>
+</body>
+</html>

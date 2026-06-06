@@ -1,0 +1,147 @@
+{
+  "company": {
+    "name": "Knowledgepie Private Limited",
+    "shortName": "Knowledgepie",
+    "tagline": "Imaging the Future — Safer MRI Contrast for Better Diagnosis",
+    "foundingYear": 2021,
+    "product": "Xeuj®",
+    "productFull": "Xeuj® Nanoparticle-based MRI Contrast Agent",
+    "patents": 2,
+    "researchYears": 12
+  },
+  "seo": {
+    "title": "Knowledgepie | Safer MRI Contrast Agents",
+    "description": "Knowledgepie is a biotechnology company developing safer nanoparticle-based MRI contrast agents. Xeuj® — a patented, NSF-free alternative for renal impaired patients.",
+    "keywords": "Knowledgepie, MRI contrast agent, Xeuj, nanoparticle contrast, safer MRI, renal impaired contrast, GBCA alternative, NSF-free, biotech India, Make in India contrast agent"
+  },
+  "team": {
+    "founder": {
+      "name": "Dr. Madhulekha Gogoi",
+      "title": "Director & Co-founder",
+      "email": "madhulekha@knowledgepie.in",
+      "phone": "+918876059434",
+      "image": "/media/team/madhulekha.jpg",
+      "bio": [
+        "An innovator, best described as a scientist, Madhulekha is committed to make a difference in people's life by her scientific and personal endeavors.",
+        "She started her research journey with a mission 'to find a better diagnostic tool to detect cancer in early stage'. She is a nanotechnologist by training with a fascination for biology. Her research has been well cited. After actively pursuing research at the institutes of International repute, she cofounded Knowledgepie Pvt. Ltd. with the BIG grant received from BIRAC, DBT. She wants to translate her ideas and research from bench to hospital, to make an impact in oncology and to make significant contribution to the global fight against cancer.",
+        "Dr. Madhulekha Gogoi has received PhD from Tezpur University and then did two post docs in IIT Guwahati and CSIR NEIST, Jorhat. She has published 11 papers in international journals and three book chapters till now. She has acquired two copyrights and one Indian patent granted (Ref no. 351940). She is the recipient of BIRAC BIG grant, DST Women Scientist Fellowship, DST National Post Doctoral Fellowship, DST Nanomission Post Doctoral Fellowship, DST INSPIRE Fellowship and gold medal in MSc in Nanoscience and Technology from Tezpur University, in 2008."
+      ]
+    },
+    "members": [
+      {
+        "name": "Mr. Aditya Man Borborah",
+        "role": "Co-founder",
+        "image": "/media/team/aditya.jpg",
+        "bio": "Mr. Borborah is a B.Tech graduate from NIT Silchar and holds an MBA from NIT Trichy. He is an ex-employee of TCS with more than 10 years of experience in IT skills and management.",
+        "phone": "+919707156777",
+        "color": "yellow"
+      },
+      {
+        "name": "Ms. Rituporna Borgohain",
+        "role": "Business Developer",
+        "image": "/media/team/rituporna.jpg",
+        "bio": "Ms. Borgohain holds a BCA and an MBA and is currently involved in business development and organizational growth initiatives.",
+        "phone": "+919678898705",
+        "color": "purple"
+      },
+      {
+        "name": "Ms. Anusuya Dutta",
+        "role": "Project Fellow",
+        "image": "/media/team/anusuya.jpg",
+        "bio": "Ms. Dutta holds an M.Sc. in Chemistry and is currently involved in product synthesis and development.",
+        "phone": "+917896064354",
+        "color": "blue"
+      }
+    ],
+    "advisors": [
+      {
+        "name": "Dr. Lakshi Saikia",
+        "role": "Material Chemist",
+        "affiliation": "CSIR-NEIST, Jorhat",
+        "image": "/media/team/lakshi-saikia.jpg",
+        "color": "purple"
+      },
+      {
+        "name": "Dr. Suman Hazarika",
+        "role": "HOD, Department of Radiology",
+        "affiliation": "Apollo Hospital, Guwahati",
+        "image": "/media/team/suman-hazarika.jpg",
+        "color": "blue"
+      },
+      {
+        "name": "Dr. Himangshu K. Bora",
+        "role": "Veterinary Science",
+        "affiliation": "CSIR-NEIST, Jorhat",
+        "image": "/media/team/himangshu-bora.jpg",
+        "color": "yellow"
+      },
+      {
+        "name": "Dr. Rituraj Konwar",
+        "role": "Toxicologist",
+        "affiliation": "CSIR-NEIST, Jorhat",
+        "image": "/media/team/rituraj-konwar.jpg",
+        "color": "yellow"
+      },
+      {
+        "name": "Dr. Manash Saikia",
+        "role": "Radiologist",
+        "affiliation": "Focus Diagnostics Laboratory, Jorhat, Assam",
+        "image": "/media/team/Manash Saikia.jpeg",
+        "color": "purple"
+      },
+      {
+        "name": "Dr. Ilias Ali",
+        "role": "Innovative R&D Leader",
+        "affiliation": "LHB Industries, St Louis, Missouri, United States",
+        "image": "/media/team/DR Ilias Ali.jpg",
+        "color": "yellow"
+      },
+      {
+        "name": "Dr. Samiron Phukan",
+        "role": "Senior Director, Integrated Drug Discovery",
+        "affiliation": "Aragen Life Sciences, Hyderabad, Telangana, India",
+        "image": "/media/team/Dr Samiron Phukan.jpg",
+        "color": "blue"
+      }
+    ]
+  },
+  "usps": [
+    {
+      "title": "First Indigenous Contrast Agent",
+      "description": "India's first 'Make in India' contrast agent, reducing import dependence and advancing healthcare innovation.",
+      "image": "/media/about/Make-in-India.jpg"
+    },
+    {
+      "title": "Eco-Friendly Synthesis",
+      "description": "Developed using a green, aqueous, thermo-free, one-pot process, ensuring sustainability with minimal environmental impact.",
+      "image": "/media/about/eco=friendly.jpg"
+    },
+    {
+      "title": "NSF-Free & Safer",
+      "description": "Iron-based formulation eliminates the risk of Nephrogenic Systemic Fibrosis (NSF) associated with gadolinium-based contrast agents.",
+      "image": "/media/about/nephrogenic.jpg"
+    },
+    {
+      "title": "Safe for Renal Patients",
+      "description": "Designed for kidney-impaired patients, providing a safer alternative to conventional gadolinium-based agents.",
+      "image": "/media/about/kidney-disease-human-anatomy.avif"
+    }
+  ],
+  "uniqueness": [
+    {
+      "title": "Environment Friendly",
+      "description": "It is produced using a green route, which means it is environmentally friendly and has minimal impact on the ecosystem.",
+      "image": "/media/index/environentment friendly.jpg"
+    },
+    {
+      "title": "Advantages related to NSF",
+      "description": "As an iron-based agent, it carries no risk of nephrogenic systemic fibrosis (NSF) unlike Gd-based contrast agents (GBCAs).",
+      "image": "/media/index/Advantages related to NSF.jpg"
+    },
+    {
+      "title": "First 'Make In India' Product",
+      "description": "Will be 'First to market' 'Make in India' product in contrast agent market.",
+      "image": "/media/index/Make-in-India.jpg"
+    }
+  ]
+}

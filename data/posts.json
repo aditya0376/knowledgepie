@@ -1,0 +1,48 @@
+{
+  "posts": [
+    {
+      "id": "nec-ignite-iitg",
+      "title": "Knowledgepie at NEC IGNITE — IIT Guwahati",
+      "slug": "nec-ignite-iitg",
+      "excerpt": "Our team participated in NEC IGNITE at IIT Guwahati, showcasing our groundbreaking nanoparticle-based MRI contrast technology.",
+      "content": "Our team had the privilege of participating in NEC IGNITE at IIT Guwahati, a prestigious platform for innovators and entrepreneurs. We showcased our flagship product Xeuj® — a patented nanoparticle-based MRI contrast agent that promises safer diagnostics for renal impaired patients.\n\nThe event provided an excellent opportunity to connect with fellow researchers, industry experts, and potential collaborators. Our demonstration of the eco-friendly, single-step synthesis process garnered significant interest from the scientific community.\n\nWe are grateful for the opportunity and remain committed to our mission of making cancer detection safer and more accessible.",
+      "image": "/media/gallery/NEC IGNITE-IITG.jfif",
+      "date": "2025-11-15",
+      "author": "Knowledgepie Team",
+      "tags": ["events", "conference", "nanotechnology"]
+    },
+    {
+      "id": "birac-big-grant",
+      "title": "BIRAC BIG Grant — A Major Milestone",
+      "slug": "birac-big-grant",
+      "excerpt": "Knowledgepie was awarded the prestigious BIRAC BIG Grant from the Department of Biotechnology, Government of India, fueling our research and development.",
+      "content": "We are proud to announce that Knowledgepie Private Limited has been awarded the BIRAC BIG (Biotechnology Ignition Grant) from the Department of Biotechnology (DBT), Government of India.\n\nThis prestigious grant recognizes the potential of our innovative nanoparticle-based MRI contrast agent technology. The funding will accelerate our research and development efforts, helping us move closer to our goal of providing safer diagnostic options for patients worldwide.\n\nThe BIG grant is a testament to the scientific rigor and commercial potential of our work. We extend our gratitude to BIRAC, DBT, and all our supporters who have believed in our vision.",
+      "image": "/media/gallery/IMG-20240612-WA0102.jpg",
+      "date": "2025-08-20",
+      "author": "Dr. Madhulekha Gogoi",
+      "tags": ["grant", "funding", "birac", "milestone"]
+    },
+    {
+      "id": "patent-granted",
+      "title": "Indian Patent Granted for Xeuj® Technology",
+      "slug": "patent-granted",
+      "excerpt": "Our innovative nanoparticle-based contrast agent technology has been granted an Indian Patent (Ref no. 351940), a major validation of our research.",
+      "content": "We are delighted to announce that the Indian Patent Office has granted a patent (Ref no. 351940) for our groundbreaking nanoparticle-based MRI contrast agent technology.\n\nThis patent protects our novel approach to developing safer contrast agents that eliminate the risk of Nephrogenic Systemic Fibrosis (NSF) associated with traditional gadolinium-based contrast agents. Our iron-based formulation is specifically designed for renal impaired patients where GBCA is banned by FDA.\n\nThis achievement reinforces our commitment to innovation and patient safety. We continue to work towards bringing this life-saving technology to market.",
+      "image": "/media/about/patent1.jpg",
+      "date": "2025-06-10",
+      "author": "Knowledgepie Team",
+      "tags": ["patent", "milestone", "xeuj", "achievement"]
+    },
+    {
+      "id": "team-research-retreat",
+      "title": "Team Research Retreat — Advancing Our Mission",
+      "slug": "team-research-retreat",
+      "excerpt": "Our team came together for a productive research retreat to discuss the next phase of development for Xeuj® and future innovations.",
+      "content": "The Knowledgepie team recently gathered for a research retreat focused on charting the next phase of our journey. Led by our Director Dr. Madhulekha Gogoi and Co-founder Mr. Aditya Man Borborah, the sessions covered:\n\n- Progress update on Xeuj® clinical development\n- Plans for scale-up and manufacturing\n- Future pipeline products\n- Collaborations and partnerships\n\nThe retreat was a wonderful opportunity for team bonding and strategic planning. We left with renewed energy and a clear roadmap for the months ahead.",
+      "image": "/media/gallery/PicsArt_07-10-12.52.00.jpg",
+      "date": "2025-04-05",
+      "author": "Knowledgepie Team",
+      "tags": ["team", "retreat", "research"]
+    }
+  ]
+}

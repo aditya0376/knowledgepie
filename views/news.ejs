@@ -1,0 +1,91 @@
+<%- include('partials/header', { pageTitle, pageDescription, baseUrl, email, phone, social, addresses, currentYear, page }) %>
+
+<main>
+  <!-- ═════ PAGE HERO ═════ -->
+  <section class="page-hero news-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">News</span>
+      </nav>
+      <h1 class="page-hero-title">Latest News</h1>
+      <p class="page-hero-subtitle">Updates, milestones, and stories from Knowledgepie</p>
+    </div>
+  </section>
+
+  <!-- ═════ FEATURED POST ═════ -->
+  <% if (posts.length > 0) { %>
+  <section class="section featured-section">
+    <div class="container">
+      <% const featured = posts[0]; %>
+      <article class="featured-post">
+        <div class="featured-image">
+          <img src="<%= featured.image || '/media/logo.png' %>" alt="<%= featured.title %>" loading="lazy" />
+        </div>
+        <div class="featured-content">
+          <div class="post-meta-top">
+            <span class="post-date"><i class="fa-regular fa-calendar"></i> <%= featured.date %></span>
+            <span class="post-featured-badge">Featured</span>
+          </div>
+          <h2 class="featured-title"><%= featured.title %></h2>
+          <p class="featured-excerpt"><%= featured.excerpt %></p>
+          <div class="featured-footer">
+            <span class="post-author"><i class="fa-regular fa-user"></i> <%= featured.author %></span>
+            <a href="/news/<%= featured.slug %>" class="btn btn-primary">Read More <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+  <% } %>
+
+  <!-- ═════ NEWS GRID ═════ -->
+  <section class="section news-grid-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">All Updates</span>
+        <h2 class="section-title">Recent Posts</h2>
+      </div>
+
+      <% if (posts.length === 0) { %>
+      <div class="news-empty">
+        <div class="news-empty-icon"><i class="fa-regular fa-newspaper"></i></div>
+        <h3>No posts yet</h3>
+        <p>Check back soon for the latest updates from Knowledgepie!</p>
+      </div>
+      <% } %>
+
+      <div class="news-grid">
+        <% posts.slice(1).forEach(function(post) { %>
+        <article class="news-card">
+          <a href="/news/<%= post.slug %>" class="news-card-link">
+            <div class="news-card-image">
+              <img src="<%= post.image || '/media/logo.png' %>" alt="<%= post.title %>" loading="lazy" />
+              <div class="news-card-date">
+                <span class="news-card-day"><%= new Date(post.date).getDate() %></span>
+                <span class="news-card-month"><%= new Date(post.date).toLocaleString('en', { month: 'short' }) %></span>
+              </div>
+            </div>
+            <div class="news-card-body">
+              <div class="news-card-tags">
+                <% (post.tags || []).slice(0, 2).forEach(function(tag) { %>
+                <span class="news-tag"><%= tag %></span>
+                <% }); %>
+              </div>
+              <h3 class="news-card-title"><%= post.title %></h3>
+              <p class="news-card-excerpt"><%= post.excerpt %></p>
+              <div class="news-card-footer">
+                <span class="news-card-author"><i class="fa-regular fa-user"></i> <%= post.author %></span>
+                <span class="news-card-read">Read <i class="fa-solid fa-arrow-right"></i></span>
+              </div>
+            </div>
+          </a>
+        </article>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('partials/footer', { baseUrl, email, phone, social, addresses, currentYear }) %>

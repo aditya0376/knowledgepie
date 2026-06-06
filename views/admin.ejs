@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — Knowledgepie</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #F0F4F8;
+      color: #1A1A2E;
+      min-height: 100vh;
+    }
+    .admin-header {
+      background: linear-gradient(135deg, #0B3D91 0%, #00B4D8 100%);
+      color: #fff;
+      padding: 20px 0;
+    }
+    .admin-header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .admin-header h1 { font-size: 1.3rem; color: #fff; }
+    .admin-header h1 i { margin-right: 8px; }
+    .admin-header a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; }
+    .admin-header a:hover { color: #fff; }
+    .admin-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+    .admin-alert {
+      padding: 14px 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .admin-alert.success { background: #DCFCE7; color: #16A34A; }
+    .admin-alert.error { background: #FEE2E2; color: #DC2626; }
+
+    /* Form Card */
+    .form-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      margin-bottom: 32px;
+    }
+    .form-card h2 { font-size: 1.2rem; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #F0F4F8; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #1A1A2E;
+    }
+    .form-group label .required { color: #DC2626; }
+    .form-group input[type="text"],
+    .form-group input[type="file"],
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 2px solid #E2E8F0;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: border-color 0.2s;
+      outline: none;
+      background: #fff;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: #0B3D91; }
+    .form-group textarea { min-height: 200px; resize: vertical; }
+    .form-group .hint { font-size: 0.8rem; color: #6C757D; margin-top: 4px; }
+    .form-group .image-preview { margin-top: 10px; }
+    .form-group .image-preview img { max-width: 200px; border-radius: 8px; border: 1px solid #E2E8F0; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 28px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+    }
+    .btn-primary { background: linear-gradient(135deg, #0B3D91, #00B4D8); color: #fff; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(11,61,145,0.2); }
+    .btn-danger { background: #DC2626; color: #fff; }
+    .btn-danger:hover { background: #B91C1C; }
+    .btn-sm { padding: 8px 16px; font-size: 0.8rem; }
+    .btn-outline { background: transparent; border: 2px solid #E2E8F0; color: #1A1A2E; }
+    .btn-outline:hover { border-color: #0B3D91; color: #0B3D91; }
+
+    /* Post List */
+    .posts-list { display: flex; flex-direction: column; gap: 12px; }
+    .post-row {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      border: 1px solid #E2E8F0;
+    }
+    .post-row-info { flex: 1; min-width: 0; }
+    .post-row-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 2px; }
+    .post-row-meta { font-size: 0.8rem; color: #6C757D; }
+    .post-row-meta i { margin-right: 4px; }
+    .post-row-actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .post-row img { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #6C757D;
+    }
+    .empty-state i { font-size: 3rem; margin-bottom: 12px; opacity: 0.3; }
+    .empty-state p { font-size: 0.9rem; }
+    .section-title { font-size: 1rem; font-weight: 700; margin-bottom: 16px; color: #1A1A2E; }
+    @media (max-width: 768px) {
+      .post-row { flex-direction: column; align-items: flex-start; }
+      .post-row-actions { width: 100%; justify-content: flex-end; }
+      .admin-header-inner { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <header class="admin-header">
+    <div class="admin-header-inner">
+      <h1><i class="fa-solid fa-gauge-high"></i> Knowledgepie Admin</h1>
+      <div>
+        <a href="/" target="_blank"><i class="fa-solid fa-up-right-from-square"></i> View Site</a>
+        <span style="margin:0 12px;opacity:0.3">|</span>
+        <a href="/news" target="_blank"><i class="fa-solid fa-newspaper"></i> View News</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="admin-container">
+    <!-- Alerts -->
+    <% if (typeof success !== 'undefined' && success) { %>
+    <div class="admin-alert success"><i class="fa-solid fa-circle-check"></i> <%= success %></div>
+    <% } %>
+    <% if (typeof error !== 'undefined' && error) { %>
+    <div class="admin-alert error"><i class="fa-solid fa-circle-exclamation"></i> <%= error %></div>
+    <% } %>
+
+    <!-- Create / Edit Post Form -->
+    <div class="form-card" id="new-post">
+      <h2><i class="fa-solid fa-pen-to-square"></i> Create New Post</h2>
+      <form method="POST" action="/admin/posts?token=<%= token %>" enctype="multipart/form-data">
+        <input type="hidden" name="token" value="<%= token %>" />
+        <div class="form-group">
+          <label for="title">Post Title <span class="required">*</span></label>
+          <input type="text" id="title" name="title" placeholder="e.g., Knowledgepie at NEC IGNITE" required />
+        </div>
+        <div class="form-group">
+          <label for="author">Author</label>
+          <input type="text" id="author" name="author" placeholder="Knowledgepie Team (default)" />
+          <div class="hint">Leave blank to use "Knowledgepie Team"</div>
+        </div>
+        <div class="form-group">
+          <label for="tags">Tags (comma-separated)</label>
+          <input type="text" id="tags" name="tags" placeholder="e.g., events, nanotechnology, grant" />
+          <div class="hint">Example: events, nanotechnology, milestone</div>
+        </div>
+        <div class="form-group">
+          <label for="image">Featured Image</label>
+          <input type="file" id="image" name="image" accept="image/*" />
+          <div class="hint">Accepted: JPG, PNG, WebP, GIF. Max 5 MB.</div>
+        </div>
+        <div class="form-group">
+          <label for="content">Post Content <span class="required">*</span></label>
+          <textarea id="content" name="content" placeholder="Write your post content here...&#10;&#10;You can use plain text. Each paragraph will be separated automatically." required></textarea>
+          <div class="hint">Use plain text. Paragraphs are created by blank lines.</div>
+        </div>
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-cloud-upload-alt"></i> Publish Post</button>
+      </form>
+    </div>
+
+    <!-- Existing Posts -->
+    <div class="form-card">
+      <h2><i class="fa-solid fa-list"></i> All Posts (<%= posts.length %>)</h2>
+      <% if (posts.length === 0) { %>
+      <div class="empty-state">
+        <i class="fa-regular fa-newspaper"></i>
+        <p>No posts yet. Create your first post above!</p>
+      </div>
+      <% } else { %>
+      <div class="posts-list">
+        <% posts.forEach(function(post) { %>
+        <div class="post-row">
+          <img src="<%= post.image || '/media/logo.png' %>" alt="<%= post.title %>" />
+          <div class="post-row-info">
+            <div class="post-row-title"><%= post.title %></div>
+            <div class="post-row-meta">
+              <i class="fa-regular fa-calendar"></i> <%= post.date %>
+              <i class="fa-regular fa-user" style="margin-left:12px;"></i> <%= post.author %>
+            </div>
+          </div>
+          <div class="post-row-actions">
+            <a href="/news/<%= post.slug %>" target="_blank" class="btn btn-sm btn-outline"><i class="fa-regular fa-eye"></i> View</a>
+            <a href="/admin/posts/<%= post.id %>/edit?token=<%= token %>" class="btn btn-sm btn-primary"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
+            <form method="POST" action="/admin/posts/<%= post.id %>/delete?token=<%= token %>" style="display:inline;" onsubmit="return confirm('Delete this post permanently?');">
+              <input type="hidden" name="token" value="<%= token %>" />
+              <button type="submit" class="btn btn-sm btn-danger"><i class="fa-regular fa-trash-can"></i> Delete</button>
+            </form>
+          </div>
+        </div>
+        <% }); %>
+      </div>
+      <% } %>
+    </div>
+
+    <!-- Quick Tips -->
+    <div class="form-card" style="background:#F8FAFC; border:2px dashed #E2E8F0;">
+      <h2><i class="fa-solid fa-lightbulb"></i> Quick Tips</h2>
+      <ul style="font-size:0.88rem;color:#4B5563;line-height:1.8;padding-left:20px;">
+        <li>Posts appear on the <strong>News</strong> page in reverse chronological order (newest first).</li>
+        <li>The most recent post automatically becomes the <strong>Featured</strong> post at the top.</li>
+        <li>Upload a <strong>featured image</strong> to make the post more visual.</li>
+        <li>Use <strong>tags</strong> to organize posts (e.g., events, patent, team, grant).</li>
+        <li>After creating a post, <strong>view it</strong> on the news page to see how it looks.</li>
+        <li>You can <strong>edit or delete</strong> any post using the buttons above.</li>
+      </ul>
+      <div style="margin-top:16px;padding-top:16px;border-top:1px solid #E2E8F0;font-size:0.8rem;color:#6C757D;">
+        <i class="fa-solid fa-shield-halved"></i> This admin panel is password-protected. Logout by closing this tab.
+      </div>
+    </div>
+  </div>
+</body>
+</html>

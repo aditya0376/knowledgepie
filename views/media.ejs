@@ -1,0 +1,56 @@
+<%- include('partials/header', { pageTitle, pageDescription, baseUrl, email, phone, social, addresses, currentYear, page }) %>
+
+<main>
+  <!-- ═════ PAGE HERO ═════ -->
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Media</span>
+      </nav>
+      <h1 class="page-hero-title">Media & Coverage</h1>
+      <p class="page-hero-subtitle">Featured videos and social coverage of our journey</p>
+    </div>
+  </section>
+
+  <!-- ═════ MEDIA CONTENT ═════ -->
+  <section class="section">
+    <div class="container">
+      <div class="media-grid">
+        <!-- Video Card -->
+        <article class="media-card">
+          <div class="media-label">
+            <i class="fa-brands fa-youtube"></i>
+            <span>Video</span>
+          </div>
+          <div class="media-embed">
+            <iframe src="https://www.youtube.com/embed/K5m5GIbKXL0?si=WEXiIH4GWIvXjsu2"
+              title="Knowledgepie promotional video" loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
+          </div>
+          <div class="media-card-body">
+            <h3>Knowledgepie — Pioneering Safer MRI Contrast Agents</h3>
+            <p>Learn about our mission, technology, and the journey behind Xeuj<sup>&reg;</sup>.</p>
+          </div>
+        </article>
+
+        <!-- LinkedIn Post Card -->
+        <article class="media-card">
+          <div class="media-label">
+            <i class="fa-brands fa-linkedin"></i>
+            <span>LinkedIn</span>
+          </div>
+          <div class="media-embed media-embed-post">
+            <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7374401672720076800?compact=1"
+              title="Embedded LinkedIn post" width="100%" height="620" frameborder="0" allowfullscreen
+              loading="lazy"></iframe>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('partials/footer', { baseUrl, email, phone, social, addresses, currentYear }) %>
