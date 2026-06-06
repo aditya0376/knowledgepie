@@ -1,0 +1,8 @@
+node_modules/
+temp_*
+screenshots/
+opencode.jsonc
+public/uploads/*
+!public/uploads/.gitkeep
+*.log
+.env
