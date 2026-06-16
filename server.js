@@ -75,33 +75,41 @@ function syncToGitHub(message) {
       let body = '';
       getRes.on('data', d => body += d);
       getRes.on('end', () => {
-        const fileInfo = JSON.parse(body);
-        const sha = fileInfo.sha || '';
-        
-        // Now update the file
-        const putData = JSON.stringify({ message: `Auto: ${message}`, content: base64, sha, branch });
-        const putOpts = {
-          hostname: 'api.github.com', path: `/repos/${owner}/${repo}/contents/data/posts.json`,
-          method: 'PUT', headers: {
-            'Authorization': `Bearer ${token}`, 'User-Agent': 'knowledgepie',
-            'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json',
-            'Content-Length': Buffer.byteLength(putData)
+        try {
+          const fileInfo = JSON.parse(body);
+          if (fileInfo.message && !fileInfo.sha) {
+            console.error('⚠️ GitHub API error:', fileInfo.message);
+            return;
           }
-        };
-        const putReq = https.request(putOpts, (putRes) => {
-          let resBody = '';
-          putRes.on('data', d => resBody += d);
-          putRes.on('end', () => {
-            if (putRes.statusCode === 200 || putRes.statusCode === 201) {
-              console.log('✅ Synced posts.json to GitHub');
-            } else {
-              console.error('⚠️ GitHub sync failed:', putRes.statusCode, resBody.slice(0, 200));
+          const sha = fileInfo.sha || '';
+          
+          // Now update the file
+          const putData = JSON.stringify({ message: `Auto: ${message}`, content: base64, sha, branch });
+          const putOpts = {
+            hostname: 'api.github.com', path: `/repos/${owner}/${repo}/contents/data/posts.json`,
+            method: 'PUT', headers: {
+              'Authorization': `Bearer ${token}`, 'User-Agent': 'knowledgepie',
+              'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json',
+              'Content-Length': Buffer.byteLength(putData)
             }
+          };
+          const putReq = https.request(putOpts, (putRes) => {
+            let resBody = '';
+            putRes.on('data', d => resBody += d);
+            putRes.on('end', () => {
+              if (putRes.statusCode === 200 || putRes.statusCode === 201) {
+                console.log('✅ Synced posts.json to GitHub');
+              } else {
+                console.error('⚠️ GitHub sync failed:', putRes.statusCode, resBody.slice(0, 200));
+              }
+            });
           });
-        });
-        putReq.on('error', e => console.error('⚠️ GitHub sync error:', e.message));
-        putReq.write(putData);
-        putReq.end();
+          putReq.on('error', e => console.error('⚠️ GitHub sync error:', e.message));
+          putReq.write(putData);
+          putReq.end();
+        } catch (e) {
+          console.error('⚠️ GitHub sync parse error:', e.message.slice(0, 200), '| body:', body.slice(0, 200));
+        }
       });
     }).on('error', e => console.error('⚠️ GitHub fetch error:', e.message));
   } catch (e) {
