@@ -4,6 +4,7 @@ const fs = require('fs');
 const https = require('https');
 const multer = require('multer');
 const crypto = require('crypto');
+const { execSync } = require('child_process');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -51,6 +52,27 @@ function loadPosts() {
 
 function savePosts(data) {
   fs.writeFileSync(POSTS_FILE, JSON.stringify(data, null, 2), 'utf-8');
+  gitAutoCommit('news post updated');
+}
+
+// Auto-commit posts + uploads to GitHub so Render redeploys with changes
+function gitAutoCommit(message) {
+  const remote = process.env.GIT_PUSH_URL;
+  if (!remote) return; // Only runs when GIT_PUSH_URL is set on Render
+  try {
+    execSync('git add data/posts.json public/uploads/', { cwd: __dirname, stdio: 'pipe' });
+    const status = execSync('git status --porcelain', { cwd: __dirname, encoding: 'utf-8', stdio: 'pipe' });
+    if (!status.trim()) return; // Nothing changed
+    
+    execSync(`git commit -m "Auto-update: ${message}" --author="Knowledgepie Admin <admin@knowledgepie.in>"`, {
+      cwd: __dirname, stdio: 'pipe'
+    });
+    // Use a unique push URL from env var to embed the token
+    execSync(`git push "${remote}"`, { cwd: __dirname, stdio: 'pipe', timeout: 30000 });
+    console.log('✅ Auto-pushed changes to GitHub');
+  } catch (e) {
+    console.error('⚠️ Git auto-commit failed:', e.message.slice(0, 200));
+  }
 }
 
 function slugify(text) {
