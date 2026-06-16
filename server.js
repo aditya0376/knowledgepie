@@ -52,26 +52,60 @@ function loadPosts() {
 
 function savePosts(data) {
   fs.writeFileSync(POSTS_FILE, JSON.stringify(data, null, 2), 'utf-8');
-  gitAutoCommit('news post updated');
+  syncToGitHub('news post updated');
 }
 
-// Auto-commit posts + uploads to GitHub so Render redeploys with changes
-function gitAutoCommit(message) {
-  const remote = process.env.GIT_PUSH_URL;
-  if (!remote) return; // Only runs when GIT_PUSH_URL is set on Render
+// Push posts.json to GitHub using API so Render redeploys with changes
+function syncToGitHub(message) {
+  const token = process.env.GITHUB_TOKEN;
+  if (!token) return; // Only runs when GITHUB_TOKEN env var is set on Render
   try {
-    execSync('git add data/posts.json public/uploads/', { cwd: __dirname, stdio: 'pipe' });
-    const status = execSync('git status --porcelain', { cwd: __dirname, encoding: 'utf-8', stdio: 'pipe' });
-    if (!status.trim()) return; // Nothing changed
+    const owner = 'aditya0376', repo = 'knowledgepie', branch = 'master';
+    const content = fs.readFileSync(POSTS_FILE, 'utf-8');
+    const base64 = Buffer.from(content).toString('base64');
     
-    execSync(`git commit -m "Auto-update: ${message}" --author="Knowledgepie Admin <admin@knowledgepie.in>"`, {
-      cwd: __dirname, stdio: 'pipe'
-    });
-    // Use a unique push URL from env var to embed the token
-    execSync(`git push "${remote}"`, { cwd: __dirname, stdio: 'pipe', timeout: 30000 });
-    console.log('✅ Auto-pushed changes to GitHub');
+    // First get the current file's SHA
+    const getUrl = `https://api.github.com/repos/${owner}/${repo}/contents/data/posts.json?ref=${branch}`;
+    const getOpts = {
+      hostname: 'api.github.com', path: `/repos/${owner}/${repo}/contents/data/posts.json?ref=${branch}`,
+      method: 'GET', headers: { 'Authorization': `Bearer ${token}`, 'User-Agent': 'knowledgepie', 'Accept': 'application/vnd.github.v3+json' }
+    };
+    
+    https.get(getOpts, (getRes) => {
+      let body = '';
+      getRes.on('data', d => body += d);
+      getRes.on('end', () => {
+        const fileInfo = JSON.parse(body);
+        const sha = fileInfo.sha || '';
+        
+        // Now update the file
+        const putData = JSON.stringify({ message: `Auto: ${message}`, content: base64, sha, branch });
+        const putOpts = {
+          hostname: 'api.github.com', path: `/repos/${owner}/${repo}/contents/data/posts.json`,
+          method: 'PUT', headers: {
+            'Authorization': `Bearer ${token}`, 'User-Agent': 'knowledgepie',
+            'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json',
+            'Content-Length': Buffer.byteLength(putData)
+          }
+        };
+        const putReq = https.request(putOpts, (putRes) => {
+          let resBody = '';
+          putRes.on('data', d => resBody += d);
+          putRes.on('end', () => {
+            if (putRes.statusCode === 200 || putRes.statusCode === 201) {
+              console.log('✅ Synced posts.json to GitHub');
+            } else {
+              console.error('⚠️ GitHub sync failed:', putRes.statusCode, resBody.slice(0, 200));
+            }
+          });
+        });
+        putReq.on('error', e => console.error('⚠️ GitHub sync error:', e.message));
+        putReq.write(putData);
+        putReq.end();
+      });
+    }).on('error', e => console.error('⚠️ GitHub fetch error:', e.message));
   } catch (e) {
-    console.error('⚠️ Git auto-commit failed:', e.message.slice(0, 200));
+    console.error('⚠️ GitHub sync error:', e.message.slice(0, 200));
   }
 }
 
