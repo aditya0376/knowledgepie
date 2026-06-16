@@ -57,21 +57,32 @@ function savePosts(data) {
 
 // Push posts.json to GitHub using API so Render redeploys with changes
 function syncToGitHub(message) {
-  const token = process.env.GITHUB_TOKEN;
-  if (!token) return; // Only runs when GITHUB_TOKEN env var is set on Render
+  const token = (process.env.GITHUB_TOKEN || '').trim();
+  if (!token) {
+    console.log('🔄 syncToGitHub: no token set, skipping');
+    return; // Only runs when GITHUB_TOKEN env var is set on Render
+  }
+  console.log(`🔄 syncToGitHub started (token length: ${token.length})`);
   try {
     const owner = 'aditya0376', repo = 'knowledgepie', branch = 'master';
     const content = fs.readFileSync(POSTS_FILE, 'utf-8');
     const base64 = Buffer.from(content).toString('base64');
     
     // First get the current file's SHA
-    const getUrl = `https://api.github.com/repos/${owner}/${repo}/contents/data/posts.json?ref=${branch}`;
     const getOpts = {
-      hostname: 'api.github.com', path: `/repos/${owner}/${repo}/contents/data/posts.json?ref=${branch}`,
-      method: 'GET', headers: { 'Authorization': `Bearer ${token}`, 'User-Agent': 'knowledgepie', 'Accept': 'application/vnd.github.v3+json' }
+      hostname: 'api.github.com',
+      path: `/repos/${owner}/${repo}/contents/data/posts.json?ref=${branch}`,
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'User-Agent': 'knowledgepie',
+        'Accept': 'application/vnd.github.v3+json'
+      }
     };
+    console.log('📤 GET request to GitHub API for SHA');
     
     https.get(getOpts, (getRes) => {
+      console.log(`📥 GET response status: ${getRes.statusCode}`);
       let body = '';
       getRes.on('data', d => body += d);
       getRes.on('end', () => {
@@ -82,38 +93,45 @@ function syncToGitHub(message) {
             return;
           }
           const sha = fileInfo.sha || '';
+          console.log(`🔑 Got SHA: ${sha ? sha.substring(0, 7) + '...' : 'empty (new file)'}`);
           
           // Now update the file
           const putData = JSON.stringify({ message: `Auto: ${message}`, content: base64, sha, branch });
           const putOpts = {
-            hostname: 'api.github.com', path: `/repos/${owner}/${repo}/contents/data/posts.json`,
-            method: 'PUT', headers: {
-              'Authorization': `Bearer ${token}`, 'User-Agent': 'knowledgepie',
-              'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json',
+            hostname: 'api.github.com',
+            path: `/repos/${owner}/${repo}/contents/data/posts.json`,
+            method: 'PUT',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'User-Agent': 'knowledgepie',
+              'Accept': 'application/vnd.github.v3+json',
+              'Content-Type': 'application/json',
               'Content-Length': Buffer.byteLength(putData)
             }
           };
+          console.log('📤 PUT request to GitHub API');
           const putReq = https.request(putOpts, (putRes) => {
+            console.log(`📥 PUT response status: ${putRes.statusCode}`);
             let resBody = '';
             putRes.on('data', d => resBody += d);
             putRes.on('end', () => {
               if (putRes.statusCode === 200 || putRes.statusCode === 201) {
                 console.log('✅ Synced posts.json to GitHub');
               } else {
-                console.error('⚠️ GitHub sync failed:', putRes.statusCode, resBody.slice(0, 200));
+                console.error('⚠️ GitHub sync failed:', putRes.statusCode, resBody.slice(0, 300));
               }
             });
           });
-          putReq.on('error', e => console.error('⚠️ GitHub sync error:', e.message));
+          putReq.on('error', e => console.error('⚠️ GitHub PUT error:', e.message));
           putReq.write(putData);
           putReq.end();
         } catch (e) {
-          console.error('⚠️ GitHub sync parse error:', e.message.slice(0, 200), '| body:', body.slice(0, 200));
+          console.error('⚠️ GitHub sync parse error:', e.message.slice(0, 300), '| body:', body.slice(0, 300));
         }
       });
     }).on('error', e => console.error('⚠️ GitHub fetch error:', e.message));
   } catch (e) {
-    console.error('⚠️ GitHub sync error:', e.message.slice(0, 200));
+    console.error('⚠️ GitHub sync error:', e.message.slice(0, 300));
   }
 }
 
