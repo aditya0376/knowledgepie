@@ -61,20 +61,6 @@
         "retreat",
         "research"
       ]
-    },
-    {
-      "id": "test-2",
-      "title": "Test 2",
-      "slug": "test-2",
-      "excerpt": "Another...",
-      "content": "Another test",
-      "image": "/uploads/1781708031336-e58b1bc7.jpg",
-      "date": "2026-06-17",
-      "author": "Knowledgepie Team",
-      "tags": [
-        "BIRAC",
-        "WSE"
-      ]
     }
   ]
 }
