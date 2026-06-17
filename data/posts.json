@@ -61,6 +61,21 @@
         "retreat",
         "research"
       ]
+    },
+    {
+      "id": "test-7",
+      "title": "Test 7",
+      "slug": "test-7",
+      "excerpt": "Last min...",
+      "content": "Last min test",
+      "image": "/uploads/1781710664593-cfcdb1b0.jpg",
+      "date": "2026-06-17",
+      "author": "Knowledgepie Team",
+      "tags": [
+        "BIRAC",
+        "WSE",
+        "Nanotechnology"
+      ]
     }
   ]
 }
