@@ -76,6 +76,19 @@
         "WSE",
         "Nanotechnology"
       ]
+    },
+    {
+      "id": "test-post-11",
+      "title": "Test post 11",
+      "slug": "test-post-11",
+      "excerpt": "Final...",
+      "content": "Final testing",
+      "image": "/uploads/1781711239834-7d191bc5.jpg",
+      "date": "2026-06-17",
+      "author": "Knowledgepie Team",
+      "tags": [
+        "Nanotech"
+      ]
     }
   ]
 }
