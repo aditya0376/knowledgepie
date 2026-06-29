@@ -211,7 +211,7 @@
         <article class="home-news-card">
           <a href="/news/<%= post.slug %>" class="home-news-link">
             <div class="home-news-image">
-              <img src="<%= post.image || '/media/logo.png' %>" alt="<%= post.title %>" loading="lazy" />
+              <img src="<%= post.image ? post.image + '?v=' + post.date.replace(/-/g, '') : '/media/logo.png' %>" alt="<%= post.title %>" loading="lazy" />
             </div>
             <div class="home-news-body">
               <span class="home-news-date"><%= post.date %></span>

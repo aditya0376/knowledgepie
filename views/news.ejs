@@ -21,7 +21,7 @@
       <% const featured = posts[0]; %>
       <article class="featured-post">
         <div class="featured-image">
-          <img src="<%= featured.image || '/media/logo.png' %>" alt="<%= featured.title %>" loading="lazy" />
+          <img src="<%= featured.image ? featured.image + '?v=' + featured.date.replace(/-/g, '') : '/media/logo.png' %>" alt="<%= featured.title %>" loading="lazy" />
         </div>
         <div class="featured-content">
           <div class="post-meta-top">
@@ -61,7 +61,7 @@
         <article class="news-card">
           <a href="/news/<%= post.slug %>" class="news-card-link">
             <div class="news-card-image">
-              <img src="<%= post.image || '/media/logo.png' %>" alt="<%= post.title %>" loading="lazy" />
+              <img src="<%= post.image ? post.image + '?v=' + post.date.replace(/-/g, '') : '/media/logo.png' %>" alt="<%= post.title %>" loading="lazy" />
               <div class="news-card-date">
                 <span class="news-card-day"><%= new Date(post.date).getDate() %></span>
                 <span class="news-card-month"><%= new Date(post.date).toLocaleString('en', { month: 'short' }) %></span>

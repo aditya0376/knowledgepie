@@ -9,7 +9,11 @@
       "image": "/media/gallery/NEC IGNITE-IITG.jfif",
       "date": "2025-11-15",
       "author": "Knowledgepie Team",
-      "tags": ["events", "conference", "nanotechnology"]
+      "tags": [
+        "events",
+        "conference",
+        "nanotechnology"
+      ]
     },
     {
       "id": "birac-big-grant",
@@ -20,7 +24,12 @@
       "image": "/media/gallery/IMG-20240612-WA0102.jpg",
       "date": "2025-08-20",
       "author": "Dr. Madhulekha Gogoi",
-      "tags": ["grant", "funding", "birac", "milestone"]
+      "tags": [
+        "grant",
+        "funding",
+        "birac",
+        "milestone"
+      ]
     },
     {
       "id": "patent-granted",
@@ -31,7 +40,12 @@
       "image": "/media/about/patent1.jpg",
       "date": "2025-06-10",
       "author": "Knowledgepie Team",
-      "tags": ["patent", "milestone", "xeuj", "achievement"]
+      "tags": [
+        "patent",
+        "milestone",
+        "xeuj",
+        "achievement"
+      ]
     },
     {
       "id": "team-research-retreat",
@@ -42,7 +56,39 @@
       "image": "/media/gallery/PicsArt_07-10-12.52.00.jpg",
       "date": "2025-04-05",
       "author": "Knowledgepie Team",
-      "tags": ["team", "retreat", "research"]
+      "tags": [
+        "team",
+        "retreat",
+        "research"
+      ]
+    },
+    {
+      "id": "test-7",
+      "title": "Test 7",
+      "slug": "test-7",
+      "excerpt": "Last min...",
+      "content": "Last min test",
+      "image": "/uploads/1781710664593-cfcdb1b0.jpg",
+      "date": "2026-06-17",
+      "author": "Knowledgepie Team",
+      "tags": [
+        "BIRAC",
+        "WSE",
+        "Nanotechnology"
+      ]
+    },
+    {
+      "id": "test-post-11",
+      "title": "Test post 11",
+      "slug": "test-post-11",
+      "excerpt": "Final...",
+      "content": "Final testing",
+      "image": "/uploads/1781711239834-7d191bc5.jpg",
+      "date": "2026-06-17",
+      "author": "Knowledgepie Team",
+      "tags": [
+        "Nanotech"
+      ]
     }
   ]
 }

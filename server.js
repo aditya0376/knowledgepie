@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -55,81 +56,103 @@ function savePosts(data) {
   syncToGitHub('news post updated');
 }
 
-// Push posts.json to GitHub using API so Render redeploys with changes
-function syncToGitHub(message) {
-  const token = (process.env.GITHUB_TOKEN || '').trim();
-  if (!token) {
-    console.log('🔄 syncToGitHub: no token set, skipping');
-    return; // Only runs when GITHUB_TOKEN env var is set on Render
-  }
-  console.log(`🔄 syncToGitHub started (token length: ${token.length})`);
-  try {
-    const owner = 'aditya0376', repo = 'knowledgepie', branch = 'master';
-    const content = fs.readFileSync(POSTS_FILE, 'utf-8');
-    const base64 = Buffer.from(content).toString('base64');
-    
-    // First get the current file's SHA
-    const getOpts = {
+// ─── GitHub helpers ───
+function githubApi(method, path, body, token) {
+  return new Promise((resolve, reject) => {
+    const opts = {
       hostname: 'api.github.com',
-      path: `/repos/${owner}/${repo}/contents/data/posts.json?ref=${branch}`,
-      method: 'GET',
+      path: `/repos/aditya0376/knowledgepie${path}`,
+      method,
       headers: {
         'Authorization': `Bearer ${token}`,
         'User-Agent': 'knowledgepie',
-        'Accept': 'application/vnd.github.v3+json'
+        'Accept': 'application/vnd.github.v3+json',
       }
     };
-    console.log('📤 GET request to GitHub API for SHA');
-    
-    https.get(getOpts, (getRes) => {
-      console.log(`📥 GET response status: ${getRes.statusCode}`);
-      let body = '';
-      getRes.on('data', d => body += d);
-      getRes.on('end', () => {
-        try {
-          const fileInfo = JSON.parse(body);
-          if (fileInfo.message && !fileInfo.sha) {
-            console.error('⚠️ GitHub API error:', fileInfo.message);
-            return;
-          }
-          const sha = fileInfo.sha || '';
-          console.log(`🔑 Got SHA: ${sha ? sha.substring(0, 7) + '...' : 'empty (new file)'}`);
-          
-          // Now update the file
-          const putData = JSON.stringify({ message: `Auto: ${message}`, content: base64, sha, branch });
-          const putOpts = {
-            hostname: 'api.github.com',
-            path: `/repos/${owner}/${repo}/contents/data/posts.json`,
-            method: 'PUT',
-            headers: {
-              'Authorization': `Bearer ${token}`,
-              'User-Agent': 'knowledgepie',
-              'Accept': 'application/vnd.github.v3+json',
-              'Content-Type': 'application/json',
-              'Content-Length': Buffer.byteLength(putData)
-            }
-          };
-          console.log('📤 PUT request to GitHub API');
-          const putReq = https.request(putOpts, (putRes) => {
-            console.log(`📥 PUT response status: ${putRes.statusCode}`);
-            let resBody = '';
-            putRes.on('data', d => resBody += d);
-            putRes.on('end', () => {
-              if (putRes.statusCode === 200 || putRes.statusCode === 201) {
-                console.log('✅ Synced posts.json to GitHub');
-              } else {
-                console.error('⚠️ GitHub sync failed:', putRes.statusCode, resBody.slice(0, 300));
-              }
-            });
-          });
-          putReq.on('error', e => console.error('⚠️ GitHub PUT error:', e.message));
-          putReq.write(putData);
-          putReq.end();
-        } catch (e) {
-          console.error('⚠️ GitHub sync parse error:', e.message.slice(0, 300), '| body:', body.slice(0, 300));
+    if (body) { opts.headers['Content-Type'] = 'application/json'; opts.headers['Content-Length'] = Buffer.byteLength(body); }
+    const req = https.request(opts, (res) => {
+      let data = '';
+      res.on('data', d => data += d);
+      res.on('end', () => resolve({ status: res.statusCode, body: data }));
+    });
+    req.on('error', reject);
+    if (body) req.write(body);
+    req.end();
+  });
+}
+
+function uploadFileToGitHub(localPath, repoPath, message, token) {
+  return new Promise((resolve) => {
+    try {
+      if (!fs.existsSync(localPath)) { resolve(); return; }
+      const content = fs.readFileSync(localPath);
+      const base64 = content.toString('base64');
+      console.log(`📤 Uploading ${repoPath}...`);
+      
+      // Get SHA of existing file
+      githubApi('GET', `/contents/${repoPath}?ref=master`, null, token).then((getRes) => {
+        let sha = '';
+        try { const info = JSON.parse(getRes.body); if (info.sha) sha = info.sha; } catch(e) {}
+        const putBody = JSON.stringify({ message: `Auto: ${message}`, content: base64, sha, branch: 'master' });
+        return githubApi('PUT', `/contents/${repoPath}`, putBody, token);
+      }).then((putRes) => {
+        if (putRes.status === 200 || putRes.status === 201) {
+          console.log(`✅ Uploaded ${repoPath}`);
+        } else {
+          console.error(`⚠️ Upload failed for ${repoPath}: status ${putRes.status}`);
         }
-      });
-    }).on('error', e => console.error('⚠️ GitHub fetch error:', e.message));
+        resolve();
+      }).catch((e) => { console.error(`⚠️ Upload error for ${repoPath}:`, e.message); resolve(); });
+    } catch(e) { console.error(`⚠️ Upload error for ${repoPath}:`, e.message); resolve(); }
+  });
+}
+
+// Push posts.json + images to GitHub so Render redeploys with changes
+function syncToGitHub(message) {
+  const token = (process.env.GITHUB_TOKEN || '').trim();
+  if (!token) { console.log('🔄 syncToGitHub: no token set, skipping'); return; }
+  console.log(`🔄 syncToGitHub started (token length: ${token.length})`);
+  
+  try {
+    const content = fs.readFileSync(POSTS_FILE, 'utf-8');
+    const base64 = Buffer.from(content).toString('base64');
+    
+    githubApi('GET', `/contents/data/posts.json?ref=master`, null, token).then((getRes) => {
+      let sha = '';
+      try { const info = JSON.parse(getRes.body); if (info.sha) sha = info.sha; } catch(e) {}
+      if (getRes.status !== 200 && getRes.status !== 404) {
+        try { const err = JSON.parse(getRes.body); console.error('⚠️ GitHub API error:', err.message); } catch(e) {}
+        return;
+      }
+      
+      const putBody = JSON.stringify({ message: `Auto: ${message}`, content: base64, sha, branch: 'master' });
+      return githubApi('PUT', `/contents/data/posts.json`, putBody, token);
+    }).then((putRes) => {
+      if (!putRes) return;
+      if (putRes.status === 200 || putRes.status === 201) {
+        console.log('✅ Synced posts.json to GitHub');
+      } else {
+        console.error('⚠️ GitHub sync failed:', putRes.status, putRes.body.slice(0, 300));
+        return;
+      }
+      
+      // Now upload any images referenced in posts
+      const allPosts = loadPosts();
+      const uploads = [];
+      for (const post of allPosts.posts) {
+        if (post.image && post.image.startsWith('/uploads/')) {
+          const localPath = path.join(__dirname, 'public', post.image);
+          const repoPath = `public${post.image}`;
+          uploads.push(uploadFileToGitHub(localPath, repoPath, message, token));
+        }
+      }
+      if (uploads.length) {
+        console.log(`📤 Uploading ${uploads.length} image(s) to GitHub...`);
+        Promise.all(uploads).then(() => console.log('✅ All images synced'));
+      }
+    }).catch((e) => {
+      console.error('⚠️ GitHub sync error:', e.message.slice(0, 300));
+    });
   } catch (e) {
     console.error('⚠️ GitHub sync error:', e.message.slice(0, 300));
   }
@@ -157,6 +180,32 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// ─── Uploaded images route (serve locally, fallback to GitHub, prevent Cloudflare 404 cache) ───
+app.use('/uploads', (req, res) => {
+  const filePath = path.join(__dirname, 'public', 'uploads', req.path);
+  if (fs.existsSync(filePath)) {
+    return res.sendFile(filePath, {
+      headers: { 'Cache-Control': 'public, max-age=604800' },
+      etag: true, lastModified: true
+    });
+  }
+  // Try proxy from GitHub raw CDN (images were uploaded there by sync)
+  const githubUrl = `https://raw.githubusercontent.com/aditya0376/knowledgepie/master/public/uploads${req.path}`;
+  https.get(githubUrl, (proxyRes) => {
+    if (proxyRes.statusCode >= 400) {
+      proxyRes.resume();
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      return res.status(404).send('Not found');
+    }
+    res.setHeader('Cache-Control', 'public, max-age=604800');
+    if (proxyRes.headers['content-type']) res.setHeader('Content-Type', proxyRes.headers['content-type']);
+    proxyRes.pipe(res);
+  }).on('error', () => {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.status(404).send('Not found');
+  });
+});
 
 // ─── Static files ───
 app.use(express.static(path.join(__dirname, 'public'), {
