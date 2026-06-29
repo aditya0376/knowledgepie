@@ -412,7 +412,7 @@ app.post('/admin/login', (req, res) => {
 // POST /admin/posts — create a new post
 app.post('/admin/posts', requireAdmin, upload.single('image'), (req, res) => {
   try {
-    const { title, content, tags, author } = req.body;
+    const { title, content, tags, author, date } = req.body;
     if (!title || !content) {
       return res.redirect('/admin?error=Title and content are required');
     }
@@ -424,8 +424,7 @@ app.post('/admin/posts', requireAdmin, upload.single('image'), (req, res) => {
     while (allPosts.posts.some(p => p.slug === finalSlug)) {
       finalSlug = `${slug}-${counter++}`;
     }
-    const now = new Date();
-    const dateStr = now.toISOString().split('T')[0];
+    const dateStr = date || new Date().toISOString().split('T')[0];
     const post = {
       id: finalSlug,
       title,
@@ -485,13 +484,14 @@ app.post('/admin/posts/:id/edit', requireAdmin, upload.single('image'), (req, re
     const allPosts = loadPosts();
     const idx = allPosts.posts.findIndex(p => p.id === req.params.id);
     if (idx === -1) return res.redirect('/admin');
-    const { title, content, tags, author } = req.body;
+    const { title, content, tags, author, date } = req.body;
     if (!title || !content) {
       return res.redirect(`/admin/posts/${req.params.id}/edit?error=Title and content are required`);
     }
     allPosts.posts[idx].title = title;
     allPosts.posts[idx].content = content;
     allPosts.posts[idx].excerpt = content.replace(/<[^>]*>/g, '').substring(0, 200).replace(/\s+\S*$/, '') + '...';
+    allPosts.posts[idx].date = date || allPosts.posts[idx].date;
     allPosts.posts[idx].author = author || 'Knowledgepie Team';
     allPosts.posts[idx].tags = tags ? tags.split(',').map(t => t.trim()).filter(Boolean) : [];
     if (req.file) {
